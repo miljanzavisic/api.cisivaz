@@ -1,0 +1,13 @@
+# Uključuje Apache rewrite engine
+RewriteEngine On
+
+# Preskače rewrite ako fajl stvarno postoji (npr. style.css, main.js)
+RewriteCond %{REQUEST_FILENAME} !-f
+
+# Preskače rewrite ako folder stvarno postoji
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Sve ostale zahteve preusmerava na index.php sa action parametrom
+# QSA = Query String Append (čuva postojeće GET parametre)
+# L = Last (ne obrađuje dalja pravila)
+RewriteRule ^(.*)$ index.php?action=$1 [QSA,L]
